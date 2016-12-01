@@ -116,6 +116,7 @@ function update() {
     game.physics.arcade.overlap(weapon.bullets,enemy1,collisionHandler1,null,this);
     game.physics.arcade.overlap(playerOne,enemy,enemyCollisionHandler,null,this);
     game.physics.arcade.overlap(playerOne,enemy1,enemyCollisionHandler1,null,this);
+    game.physics.arcade.overlap(playerOne,playerTwo,playerCollisionHandler,null,this);
 
     game.physics.arcade.overlap(playerTwoWeapon.bullets,enemy,collisionHandler,null,this);
     game.physics.arcade.overlap(playerTwoWeapon.bullets,enemy1,collisionHandler1,null,this);
@@ -228,6 +229,14 @@ function enemyCollisionHandler1(playerOne, enemy1) {
     playerParticles.y = playerOne.y; 
     playerParticles.start(true, 2500, null, 10);
 } 
+
+function playerCollisionHandler(playerOne, playerTwo) {
+    playerOne.kill(); 
+    playerTwo.kill(); 
+    playerParticles.x = playerOne.x; 
+    playerParticles.y = playerOne.y; 
+    playerParticles.start(true, 2500, null, 10);
+}
 
 function startup() {
     setInterval(function() {
