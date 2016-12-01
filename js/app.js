@@ -11,7 +11,7 @@ function preload() {
     game.load.image('playerParticles', 'assets/shipblowup.png');
 }
 
-var sprite;
+var playerOne;
 var playerTwo; 
 var playerTwoWeapon; 
 var weapon;
@@ -51,11 +51,11 @@ function create() {
     playerTwoText = this.game.add.text((window.innerWidth / 2) + 300, window.innerHeight - 40, "Plaer Two: ", {font: '32px Arial', fill:  '#fff'});
 
     // player one settings
-    sprite = this.add.sprite(400, 300, 'ship');
-    sprite.anchor.set(0.5);
-    game.physics.arcade.enable(sprite);
-    sprite.body.drag.set(70);
-    sprite.body.maxVelocity.set(200);
+    playerOne = this.add.sprite(400, 300, 'ship');
+    playerOne.anchor.set(0.5);
+    game.physics.arcade.enable(playerOne);
+    playerOne.body.drag.set(70);
+    playerOne.body.maxVelocity.set(200);
 
     // player two settings
     playerTwo = this.add.sprite(window.innerWidth - 300, 300, 'ship');
@@ -65,7 +65,7 @@ function create() {
     playerTwo.body.maxVelocity.set(200);
 
     // create player ship particles
-    playerParticles = this.add.emitter(sprite.x, sprite.y, 30);  
+    playerParticles = this.add.emitter(playerOne.x, playerOne.y, 30);  
     playerParticles.minParticleScale = 0.05; 
     playerParticles.maxParticleScale = 0.5; 
     playerParticles.minParticleSpeed.setTo(-15, 15); 
@@ -100,7 +100,7 @@ function create() {
     enemyParticles.makeParticles("enemyParticles");
     enemyParticles.gravity = 0; 
 
-    weapon.trackSprite(sprite, 0, 0, true);
+    weapon.trackSprite(playerOne, 0, 0, true);
     playerTwoWeapon.trackSprite(playerTwo, 0, 0, true);
     cursors = this.input.keyboard.createCursorKeys();
     fireButton = this.input.keyboard.addKey(Phaser.KeyCode.SPACEBAR);
@@ -114,8 +114,8 @@ function update() {
     // collision handlers
     game.physics.arcade.overlap(weapon.bullets,enemy,collisionHandler,null,this);
     game.physics.arcade.overlap(weapon.bullets,enemy1,collisionHandler1,null,this);
-    game.physics.arcade.overlap(sprite,enemy,enemyCollisionHandler,null,this);
-    game.physics.arcade.overlap(sprite,enemy1,enemyCollisionHandler1,null,this);
+    game.physics.arcade.overlap(playerOne,enemy,enemyCollisionHandler,null,this);
+    game.physics.arcade.overlap(playerOne,enemy1,enemyCollisionHandler1,null,this);
 
     game.physics.arcade.overlap(playerTwoWeapon.bullets,enemy,collisionHandler,null,this);
     game.physics.arcade.overlap(playerTwoWeapon.bullets,enemy1,collisionHandler1,null,this);
@@ -129,20 +129,20 @@ function update() {
 
     // player one controlls
     if (W.isDown) {
-        game.physics.arcade.accelerationFromRotation(sprite.rotation, 300, sprite.body.acceleration);
+        game.physics.arcade.accelerationFromRotation(playerOne.rotation, 300, playerOne.body.acceleration);
     }
     else {
-        sprite.body.acceleration.set(0);
+        playerOne.body.acceleration.set(0);
     }
 
     if (A.isDown) {
-        sprite.body.angularVelocity = -300;
+        playerOne.body.angularVelocity = -300;
     }
     else if (D.isDown) {
-        sprite.body.angularVelocity = 300;
+        playerOne.body.angularVelocity = 300;
     }
     else {
-        sprite.body.angularVelocity = 0;
+        playerOne.body.angularVelocity = 0;
     }
 
     if (fireButton.isDown) {
@@ -172,7 +172,7 @@ function update() {
         playerTwoWeapon.fire();
     }
 
-    game.world.wrap(sprite, 16);
+    game.world.wrap(playerOne, 16);
     game.world.wrap(playerTwo, 16);
     game.world.wrap(enemy, 16);
     game.world.wrap(enemy1, 16);
@@ -215,17 +215,17 @@ function collisionHandler1(bullet, enemy1) {
         }, 750); 
 }
 
-function enemyCollisionHandler(sprite, enemy) {
-    sprite.kill();
-    playerParticles.x = sprite.x; 
-    playerParticles.y = sprite.y; 
+function enemyCollisionHandler(playerOne, enemy) {
+    playerOne.kill();
+    playerParticles.x = playerOne.x; 
+    playerParticles.y = playerOne.y; 
     playerParticles.start(true, 2500, null, 10);
 }
 
-function enemyCollisionHandler1(sprite, enemy1) {
-    sprite.kill();
-    playerParticles.x = sprite.x; 
-    playerParticles.y = sprite.y; 
+function enemyCollisionHandler1(playerOne, enemy1) {
+    playerOne.kill();
+    playerParticles.x = playerOne.x; 
+    playerParticles.y = playerOne.y; 
     playerParticles.start(true, 2500, null, 10);
 } 
 
