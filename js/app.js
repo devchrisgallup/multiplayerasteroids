@@ -38,13 +38,12 @@ function create() {
     weapon = game.add.weapon(30, 'bullet');
     weapon.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS;
     weapon.bulletSpeed = 900;
-    weapon.fireRate = 300;
+    weapon.fireRate = 200;
 
     playerTwoWeapon = game.add.weapon(30, 'bullet');
     playerTwoWeapon.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS;
-
     playerTwoWeapon.bulletSpeed = 900;
-    playerTwoWeapon.fireRate = 300;
+    playerTwoWeapon.fireRate = 200;
 
     // Player One and Player Two text
     playerOneText = this.game.add.text((window.innerWidth / 2) - 300, window.innerHeight - 40, "Player One: ", {font: '32px Arial', fill:  '#fff'});
