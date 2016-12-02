@@ -35,11 +35,13 @@ var playerOneScore = 0;
 var playerTwoScore = 0; 
 
 function create() {
+    // Player One Weapons
     weapon = game.add.weapon(30, 'bullet');
     weapon.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS;
     weapon.bulletSpeed = 900;
     weapon.fireRate = 200;
 
+    // Player Two Weapons
     playerTwoWeapon = game.add.weapon(30, 'bullet');
     playerTwoWeapon.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS;
     playerTwoWeapon.bulletSpeed = 900;
@@ -99,8 +101,11 @@ function create() {
     enemyParticles.makeParticles("enemyParticles");
     enemyParticles.gravity = 0; 
 
+    // weapon tracking
     weapon.trackSprite(playerOne, 0, 0, true);
     playerTwoWeapon.trackSprite(playerTwo, 0, 0, true);
+
+    // Controls
     cursors = this.input.keyboard.createCursorKeys();
     fireButton = this.input.keyboard.addKey(Phaser.KeyCode.SPACEBAR);
     W = game.input.keyboard.addKey(Phaser.KeyCode.W);
@@ -116,7 +121,7 @@ function update() {
     game.physics.arcade.overlap(playerOne,enemy,enemyCollisionHandler,null,this);
     game.physics.arcade.overlap(playerOne,enemy1,enemyCollisionHandler1,null,this);
     game.physics.arcade.overlap(playerOne,playerTwo,playerCollisionHandler,null,this);
-
+    // player two
     game.physics.arcade.overlap(playerTwoWeapon.bullets,enemy,collisionHandler,null,this);
     game.physics.arcade.overlap(playerTwoWeapon.bullets,enemy1,collisionHandler1,null,this);
     game.physics.arcade.overlap(playerTwo,enemy,enemyCollisionHandler,null,this);
@@ -172,6 +177,7 @@ function update() {
         playerTwoWeapon.fire();
     }
 
+    // wraps
     game.world.wrap(playerOne, 16);
     game.world.wrap(playerTwo, 16);
     game.world.wrap(enemy, 16);
