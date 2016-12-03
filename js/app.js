@@ -37,15 +37,19 @@ var playerTwoScore = 0;
 function create() {
     // Player One Weapons
     weapon = game.add.weapon(30, 'bullet');
-    weapon.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS;
+    weapon.bulletKillType = Phaser.Weapon.KILL_LIFESPAN;
+    weapon.bulletLifespan = 1000;
     weapon.bulletSpeed = 900;
     weapon.fireRate = 200;
+    weapon.bulletWorldWrap = true; 
 
     // Player Two Weapons
     playerTwoWeapon = game.add.weapon(30, 'bullet');
-    playerTwoWeapon.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS;
+    playerTwoWeapon.bulletKillType = Phaser.Weapon.KILL_LIFESPAN;
+    playerTwoWeapon.bulletLifespan = 1000;
     playerTwoWeapon.bulletSpeed = 900;
     playerTwoWeapon.fireRate = 200;
+    playerTwoWeapon.bulletWorldWrap = true; 
 
     // Player One and Player Two text
     playerOneText = this.game.add.text((window.innerWidth / 2) - 300, window.innerHeight - 40, "Player One: ", {font: '32px Arial', fill:  '#fff'});
