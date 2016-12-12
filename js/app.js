@@ -136,6 +136,8 @@ function update() {
     enemy1.body.velocity.y += randomX; 
     enemy1.body.velocity.x -= randomY; 
 
+    console.log(randomX + " " + randomY);
+
     // player one controlls
     if (W.isDown) {
         game.physics.arcade.accelerationFromRotation(playerOne.rotation, 300, playerOne.body.acceleration);
@@ -189,39 +191,39 @@ function update() {
 
 }
 
-function collisionHandler(bullet, enemy) { 
+function collisionHandler(enemy, bullet) { 
     playerOneScore++; 
-    var randomSpeed = Math.floor(Math.random()*200)+201;
+    var randomSpeed = Math.floor(Math.random() * 200) + 200;
     var width = window.innerWidth;
     var height = window.innerHeight;
     var randomHeight = Math.floor(Math.random()*height)+1;
     var randomWidth = Math.floor(Math.random()*width)+1;
-    bullet.kill();
+    enemy.kill();
     enemyParticles.x = enemy.x; 
     enemyParticles.y = enemy.y; 
     enemyParticles.start(true, 1000, null, 10);
 
     setTimeout(function(){
-        bullet.reset(randomWidth, randomHeight);
-        bullet.body.maxVelocity.set(randomSpeed);
+        enemy.reset(randomWidth, randomHeight);
+        enemy.body.maxVelocity.set(randomSpeed);
         }, 500); 
 }
 
-function collisionHandler1(bullet, enemy1) { 
+function collisionHandler1(enemy1, bullet) { 
     playerTwoScore++; 
-    var randomSpeed = Math.floor(Math.random()*400)+201;
+    var randomSpeed = Math.floor(Math.random() * 400) + 200;
     var width = window.innerWidth;
     var height = window.innerHeight;
     var randomHeight = Math.floor(Math.random()*height)+1;
     var randomWidth = Math.floor(Math.random()*width)+1;
-    bullet.kill();
+    enemy1.kill();
     enemyParticles.x = enemy1.x; 
     enemyParticles.y = enemy1.y; 
     enemyParticles.start(true, 1000, null, 10);
 
     setTimeout(function(){
-        bullet.reset(randomWidth, randomHeight);
-        bullet.body.maxVelocity.set(randomSpeed);
+        enemy1.reset(randomWidth, randomHeight);
+        enemy1.body.maxVelocity.set(randomSpeed);
         }, 750); 
 }
 
