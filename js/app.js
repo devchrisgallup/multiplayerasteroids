@@ -119,6 +119,9 @@ function create() {
 }
 
 function update() {
+    // update score text
+    playerOneText.text = "Player One: " + playerOneScore; 
+    playerTwoText.text = "player Two: " + playerTwoScore; 
     // collision handlers
     game.physics.arcade.overlap(weapon.bullets,enemy,collisionHandler,null,this);
     game.physics.arcade.overlap(weapon.bullets,enemy1,collisionHandler1,null,this);
@@ -126,8 +129,8 @@ function update() {
     game.physics.arcade.overlap(playerOne,enemy1,enemyCollisionHandler1,null,this);
     game.physics.arcade.overlap(playerOne,playerTwo,playerCollisionHandler,null,this);
     // player two
-    game.physics.arcade.overlap(playerTwoWeapon.bullets,enemy,collisionHandler,null,this);
-    game.physics.arcade.overlap(playerTwoWeapon.bullets,enemy1,collisionHandler1,null,this);
+    game.physics.arcade.overlap(playerTwoWeapon.bullets,enemy,collisionHandlerOne,null,this);
+    game.physics.arcade.overlap(playerTwoWeapon.bullets,enemy1,collisionHandlerTwo,null,this);
     game.physics.arcade.overlap(playerTwo,enemy,enemyCollisionHandler,null,this);
     game.physics.arcade.overlap(playerTwo,enemy1,enemyCollisionHandler1,null,this);
 
@@ -191,6 +194,42 @@ function update() {
 
 }
 
+function collisionHandlerOne(enemy, bullet) { 
+    playerTwoScore++; 
+    var randomSpeed = Math.floor(Math.random() * 400) + 200;
+    var width = window.innerWidth;
+    var height = window.innerHeight;
+    var randomHeight = Math.floor(Math.random()*height)+1;
+    var randomWidth = Math.floor(Math.random()*width)+1;
+    enemy.kill();
+    enemyParticles.x = enemy.x; 
+    enemyParticles.y = enemy.y; 
+    enemyParticles.start(true, 1000, null, 10);
+    // reset enemy
+    setTimeout(function(){
+        enemy.reset(randomWidth, randomHeight);
+        enemy.body.maxVelocity.set(randomSpeed);
+        }, 750); 
+}
+
+function collisionHandlerTwo(enemy1, bullet) { 
+    playerTwoScore++; 
+    var randomSpeed = Math.floor(Math.random() * 400) + 200;
+    var width = window.innerWidth;
+    var height = window.innerHeight;
+    var randomHeight = Math.floor(Math.random()*height)+1;
+    var randomWidth = Math.floor(Math.random()*width)+1;
+    enemy1.kill();
+    enemyParticles.x = enemy1.x; 
+    enemyParticles.y = enemy1.y; 
+    enemyParticles.start(true, 1000, null, 10);
+    // reset enemy
+    setTimeout(function(){
+        enemy1.reset(randomWidth, randomHeight);
+        enemy1.body.maxVelocity.set(randomSpeed);
+        }, 750); 
+}
+
 function collisionHandler(enemy, bullet) { 
     playerOneScore++; 
     var randomSpeed = Math.floor(Math.random() * 200) + 200;
@@ -202,7 +241,7 @@ function collisionHandler(enemy, bullet) {
     enemyParticles.x = enemy.x; 
     enemyParticles.y = enemy.y; 
     enemyParticles.start(true, 1000, null, 10);
-
+    // reset enemy
     setTimeout(function(){
         enemy.reset(randomWidth, randomHeight);
         enemy.body.maxVelocity.set(randomSpeed);
@@ -210,7 +249,7 @@ function collisionHandler(enemy, bullet) {
 }
 
 function collisionHandler1(enemy1, bullet) { 
-    playerTwoScore++; 
+    playerOneScore++; 
     var randomSpeed = Math.floor(Math.random() * 400) + 200;
     var width = window.innerWidth;
     var height = window.innerHeight;
@@ -220,7 +259,7 @@ function collisionHandler1(enemy1, bullet) {
     enemyParticles.x = enemy1.x; 
     enemyParticles.y = enemy1.y; 
     enemyParticles.start(true, 1000, null, 10);
-
+    // reset enemy
     setTimeout(function(){
         enemy1.reset(randomWidth, randomHeight);
         enemy1.body.maxVelocity.set(randomSpeed);
