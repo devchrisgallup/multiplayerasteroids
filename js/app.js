@@ -271,6 +271,10 @@ function enemyCollisionHandler(playerOne, enemy) {
     playerParticles.x = playerOne.x; 
     playerParticles.y = playerOne.y; 
     playerParticles.start(true, 2500, null, 10);
+    // reset player
+    setTimeout(function(){
+        playerOne.reset(400, 300);
+        }, 3000); 
 }
 
 function enemyCollisionHandler1(playerOne, enemy1) {
@@ -278,6 +282,10 @@ function enemyCollisionHandler1(playerOne, enemy1) {
     playerParticles.x = playerOne.x; 
     playerParticles.y = playerOne.y; 
     playerParticles.start(true, 2500, null, 10);
+    // reset player
+    setTimeout(function(){
+        playerOne.reset(400, 300);
+        }, 3000); 
 } 
 
 function playerCollisionHandler(playerOne, playerTwo) {
