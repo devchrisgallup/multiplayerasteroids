@@ -3,6 +3,7 @@ var VERSION = '2.6.2';
 var game = new Phaser.Game(window.innerWidth, window.innerHeight, Phaser.CANVAS, '', { preload: preload, create: create, update: update });
 
 function preload() {
+    // preload assets
     game.load.image('bullet', 'assets/bullet.png');
     game.load.image('ship', 'assets/ship.png');
     game.load.image('enemy', 'assets/enemy.png');
