@@ -10,4 +10,5 @@
       move left:    left arrow
       move right:   right arrow
       fire:         enter
-      
+   
+<a href="http://christophergallup.com/astroids/index.html">Play</a>
