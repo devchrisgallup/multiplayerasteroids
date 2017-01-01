@@ -132,15 +132,13 @@ function update() {
     // player two
     game.physics.arcade.overlap(playerTwoWeapon.bullets,enemy,collisionHandlerOne,null,this);
     game.physics.arcade.overlap(playerTwoWeapon.bullets,enemy1,collisionHandlerTwo,null,this);
-    game.physics.arcade.overlap(playerTwo,enemy,enemyCollisionHandler,null,this);
-    game.physics.arcade.overlap(playerTwo,enemy1,enemyCollisionHandler1,null,this);
-
+    game.physics.arcade.overlap(playerTwo,enemy,enemyCollisionHandlerOne,null,this);
+    game.physics.arcade.overlap(playerTwo,enemy1,enemyCollisionHandlerTwo,null,this);
+    // random velocity for enemies 
     enemy.body.velocity.y += randomY; 
     enemy.body.velocity.x += randomX; 
     enemy1.body.velocity.y += randomX; 
     enemy1.body.velocity.x -= randomY; 
-
-    console.log(randomX + " " + randomY);
 
     // player one controlls
     if (W.isDown) {
@@ -288,6 +286,28 @@ function enemyCollisionHandler1(playerOne, enemy1) {
         playerOne.reset(400, 300);
         }, 3000); 
 } 
+
+function enemyCollisionHandlerOne(playerTwo, enemy) {
+    playerTwo.kill();
+    playerParticles.x = playerTwo.x; 
+    playerParticles.y = playerTwo.y; 
+    playerParticles.start(true, 2500, null, 10);
+    // reset player
+    setTimeout(function(){
+        playerTwo.reset(400, 300);
+        }, 3000); 
+}
+
+function enemyCollisionHandlerTwo(playerTwo, enemy1) {
+    playerTwo.kill();
+    playerParticles.x = playerTwo.x; 
+    playerParticles.y = playerTwo.y; 
+    playerParticles.start(true, 2500, null, 10);
+    // reset player
+    setTimeout(function(){
+        playerTwo.reset(400, 300);
+        }, 3000); 
+}
 
 function playerCollisionHandler(playerOne, playerTwo) {
     playerOne.kill(); 
