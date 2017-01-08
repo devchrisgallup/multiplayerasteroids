@@ -11,7 +11,6 @@ function preload() {
     game.load.image('enemyParticles', 'assets/blowup.png');
     game.load.image('playerParticles', 'assets/shipblowup.png');
 }
-
 var playerOne;
 var playerTwo; 
 var playerTwoWeapon; 
@@ -36,6 +35,8 @@ var playerOneScore = 0;
 var playerTwoScore = 0; 
 
 function create() {
+    // shooting sound
+    shoot = game.add.audio('shootSound');
     // Player One Weapons
     weapon = game.add.weapon(30, 'bullet');
     weapon.bulletKillType = Phaser.Weapon.KILL_LIFESPAN;
