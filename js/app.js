@@ -337,7 +337,7 @@ function startup() {
         randomY = Math.floor(Math.random() * 10) + 1;
     }, 5000);
     
-    // set enemy to show after 10 seconds 
+    // set enemy to show after 3 seconds 
     setTimeout(function() {
         enemy2.reset(800, 300);
     }, 3000);
