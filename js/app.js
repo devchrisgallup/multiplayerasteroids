@@ -337,10 +337,10 @@ function startup() {
         randomY = Math.floor(Math.random() * 10) + 1;
     }, 5000);
     
-    // set enemy to show after 10 seconds 
+    // set enemy to show after 15 seconds 
     setTimeout(function() {
         enemy2.reset(800, 10);
-    }, 10000);
+    }, 15000);
 }
 
 window.addEventListener('load', startup, false); 
