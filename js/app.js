@@ -18,7 +18,8 @@ var weapon;
 var cursors;
 var fireButton;
 var enemy;  
-var enemy1; 
+var enemy1;
+var enemy2; 
 var enemyParticles; 
 var playerParticles; 
 var globalX; 
@@ -97,6 +98,15 @@ function create() {
     enemy1.scale.setTo(0.2,0.2);
     enemy1.body.maxVelocity.set(200);
     enemy1.bulletWorldWrap = true;
+    
+    // enemy settings
+    enemy2 = this.add.sprite(500, 500, 'enemy');
+    enemy2.anchor.set(0.5);
+    game.physics.arcade.enable(enemy2);
+    enemy2.body.drag.set(70);
+    enemy2.body.maxVelocity.set(200);
+    enemy2.bulletWorldWrap = true;
+    enemy2.kill();
 
     // create enemy ship particles
     enemyParticles = this.add.emitter(enemy.x, enemy.y, 3);  
@@ -140,6 +150,8 @@ function update() {
     enemy.body.velocity.x += randomX; 
     enemy1.body.velocity.y += randomX; 
     enemy1.body.velocity.x -= randomY; 
+    enemy2.body.velocity.y += randomX; 
+    enemy2.body.velocity.x -= randomY; 
 
     // player one controlls
     if (W.isDown) {
@@ -191,6 +203,7 @@ function update() {
     game.world.wrap(playerTwo, 16);
     game.world.wrap(enemy, 16);
     game.world.wrap(enemy1, 16);
+    game.world.wrap(enemy2, 16);
 
 }
 
@@ -323,6 +336,11 @@ function startup() {
         randomX = Math.floor(Math.random() * 10)+ 1;
         randomY = Math.floor(Math.random() * 10) + 1;
     }, 5000);
+    
+    // set enemy to show after 10 seconds 
+    setTimeout(function() {
+        enemy2.reset(800, 300);
+    }, 3000);
 }
 
 window.addEventListener('load', startup, false); 
