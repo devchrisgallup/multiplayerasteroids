@@ -340,7 +340,7 @@ function startup() {
     // set enemy to show after 10 seconds 
     setTimeout(function() {
         enemy2.reset(800, 10);
-    }, 3000);
+    }, 10000);
 }
 
 window.addEventListener('load', startup, false); 
